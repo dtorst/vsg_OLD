@@ -1,0 +1,201 @@
+<ion-view title="Discover">
+ <!-- <ion-side-menus>
+  <!-- Center content -->
+  <!-- <ion-side-menu-content>
+<!--
+<ion-nav-buttons side="left">
+  <button class="button button-icon icon ion-navicon" ng-click="toggleLeft()"></button>
+  </ion-nav-buttons> -->
+  <ion-content>
+    <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search by name, city, or keywords" data-ng-model="search1">
+  </label>
+
+  <!-- killing these to test out accordion / checkbox option
+        <label class="item item-input item-select">
+    <div class="input-label">
+    Rating
+    </div>
+    <select ng-model="search.rating">
+      <option value="">All ratings</option>
+      <option value="1">1 artichoke</option>
+      <option value="2">2 artichokes</option>
+      <option value="3">3 artichokes</option>
+      <option value="4">4 artichokes</option>
+      <option value="5">5 artichokes</option>
+      <option value="100">100% Vegetarian</option>
+    </select>
+  </label>
+        <label class="item item-input item-select">
+    <div class="input-label">
+    Price
+    </div>
+    <select ng-model="search.priceNum">
+      <option value="">All prices</option>
+      <option value="1">$</option>
+      <option value="2">$$</option>
+      <option value="3">$$$</option>
+      <option value="4">$$$$</option>
+    </select>
+  </label>
+
+-->
+
+      <ion-list>
+        <ion-checkbox class="checkbox-balanced" ng-model="search.rating"
+                      ng-true-value="100"
+                      ng-false-value="!100">
+          100% Vegetarian
+        </ion-checkbox>
+        <ion-checkbox class="checkbox-balanced" ng-model="search.rating"
+                      ng-true-value="5"
+                      ng-false-value="!5">
+          5 Artichokes
+        </ion-checkbox>
+      <div>
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(div)"
+                    ng-class="{active: isGroupShown(div)}">
+              <i class="icon balanced" ng-class="isGroupShown(div) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            Group A
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div)">
+            item 1
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div)">
+            item 2
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div)">
+            item 3
+          </ion-item>
+      </div>
+      <div>
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(div2)"
+                    ng-class="{active: isGroupShown(div2)}">
+              <i class="icon" ng-class="isGroupShown(div2) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            Group B
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div2)">
+            item 1
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div2)">
+            item 2
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div2)">
+            item 3
+          </ion-item>
+      </div>
+      <div>
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(div1)"
+                    ng-class="{active: isGroupShown(div1)}">
+              <i class="icon" ng-class="isGroupShown(div1) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            Group C
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div1)">
+            item 1
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div1)">
+            item 2
+          </ion-item>
+          <ion-item class="item-accordion" ng-show="isGroupShown(div1)">
+            item 3
+          </ion-item>
+      </div>
+      </ion-list>
+
+    <ion-list ng-controller="LoadCtrl">
+
+      <ion-item class="item-avatar" animation="slide-in-up" ng-repeat="restaurant in restaurants | filter: search | filter: search1 | limitTo:totalDisplayed" type="item-text-wrap" href="#/tab/restaurant/{{restaurant.id}}">
+        <img ng-if="restaurant.photo3name" ng-src="http://api.veggiesetgo.com/pics/{{ restaurant.photo3name }}" width="100" height="100" style="max-width:50px;max-height:50px;top:20px;">
+        <img ng-if="!restaurant.photo3name && restaurant.photo2name" ng-src="http://api.veggiesetgo.com/pics/{{ restaurant.photo2name }}" width="100" height="100" style="max-width:50px;max-height:50px;top:20px;">
+      <img ng-if="!restaurant.photo2name && restaurant.photoName" ng-src="http://api.veggiesetgo.com/pics/{{ restaurant.photoName }}" width="100" height="100" style="max-width:50px;max-height:50px;top:20px;">
+        <img ng-if="!restaurant.photoName" ng-src="img/icon.jpg" width="100" height="100" style="max-width:50px;max-height:50px;top:20px;">
+    <div class="row" style="width:100%;padding:0px 10px;margin:0px;"><div class="col" style="padding:0px;margin:0px;">
+        <p><strong>{{restaurant.name}}</strong></p></div></div>
+    <div class="row" style="padding:0px 10px;margin:0px;"><div class="col" style="padding:0px;margin:0px;"><p style="font-size:0.8em;">{{restaurant.street1}}, {{restaurant.street2}} {{restaurant.city}}, {{restaurant.state}} {{restaurant.country}}</p>
+    </div></div>
+    <div class="row" style="padding:0px 10px;margin:0px;">
+      <div class="col" style="padding:0px;margin:0px;"><p style="font-size:0.8em;"><span ng-if="restaurant.distance">{{restaurant.distance}} miles away&nbsp;&nbsp;</span><span ng-if="restaurant.price">{{restaurant.price}}&nbsp;&nbsp;</span><span style="position:relative;top:2px;"><img style="height:15px;" ng-src="img/artichokes/15/artichoke-{{ restaurant.rating }}.png"/></span></p></div>
+    </div>
+      </ion-item>
+
+      <ion-item>
+      <button ng-if="!noMoreEntries" class="button button-block button-stable" ng-click="loadMore()">
+  Load More
+</button>
+</ion-item>
+    </ion-list>
+  </ion-content>
+
+<!--
+  </ion-side-menu-content>
+
+  <!-- Left menu -->
+  <!--<ion-side-menu side="left">
+      <ion-header-bar class="bar-positive">Options
+    </ion-header-bar>
+    <ion-content>
+<div class="list">
+<!--
+  <label class="item item-input item-select">
+    <div class="input-label">
+    Location
+    </div>
+    <select>
+      <option>Blue</option>
+      <option>Green</option>
+      <option>Red</option>
+    </select>
+  </label>
+
+  <label class="item item-input item-select">
+    <div class="input-label">
+    Cuisine
+    </div>
+    <select>
+      <option>Blue</option>
+      <option>Green</option>
+      <option>Red</option>
+    </select>
+  </label>
+
+  <label class="item item-input item-select">
+    <div class="input-label">
+    Price
+    </div>
+    <select>
+      <option>$</option>
+      <option>$$</option>
+      <option>$$$</option>
+      <option>$$$$</option>
+    </select>
+  </label>
+
+--
+
+  <label class="item item-input item-select">
+    <div class="input-label">
+    Rating
+    </div>
+    <select ng-model="search.rating">
+      <option value="1">1 artichoke</option>
+      <option value="2">2 artichokes</option>
+      <option value="3">3 artichokes</option>
+      <option value="4">4 artichokes</option>
+      <option value="5">5 artichokes</option>
+      <option value="100">100% Vegetarian</option>
+    </select>
+  </label>
+
+</div>
+    </ion-content>
+  </ion-side-menu>
+
+</ion-side-menus> -->
+</ion-view>

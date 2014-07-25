@@ -1,0 +1,71 @@
+
+<ion-view title="{{restaurant.details.name}}">
+
+    <ion-content has-header="true" padding="true" style="background-color:#edf0f3;">
+  <div class="image-container">
+<a href="#tab/explore/restaurant/{{ restaurant.details.id }}/pics"><img ng-src="http://api.veggiesetgo.com/pics/{{restaurant.details.topPhoto}}"/></a></div>
+
+<div class="card">
+  <div class="item item-divider item-text-wrap">
+<div> <!-- name and artichoke -->
+  <div class="artichokes"><img ng-src="img/artichokes/artichoke-{{ restaurant.details.rating }}.png"/></div>
+  <h2>{{ restaurant.details.name }}&nbsp;<span style="font-weight:normal;font-size:0.9em;color:#5a5a5a;">({{ restaurant.details.price }})</span></h2>
+</div>
+<div class="row"> <!-- address -->
+<p style="font-weight:normal;font-size:0.8em;margin-left:-5px;">{{ restaurant.details.street1 }} {{ restaurant.details.city }}, {{ restaurant.details.state }} {{ restaurant.details.zip }}</p>
+</div>
+</div><!--/item -->
+
+  <div class="item" style="padding:0;margin:0;">
+<a href="comgooglemaps://?center={{restaurant.details.lat}},{{restaurant.details.lng}}&zoom=14"><img class="map-main" src="http://maps.googleapis.com/maps/api/staticmap?center={{ restaurant.details.street1 }},{{ restaurant.details.city }}{{ restaurant.details.state }}&zoom=15&size=318x100&maptype=roadmap&markers=color:green%7Clabel:%7C{{ restaurant.details.street1 }},{{ restaurant.details.city }}{{ restaurant.details.state }}&sensor=false" \></a>
+  </div>
+  <div class="item" style="padding:0;margin:0;"> <div class="row">
+  <div ng-class="{'col col-20 badges-active': restaurant.details.vegan == 1, 'col col-20 badges': restaurant.details.vegan == 0 || 'null'}"><span>vegan</span><i ng-if="restaurant.details.vegan" class="ion-checkmark-round" style="margin-left:5px;"></i></div>
+  <div ng-class="{'col col-25 badges-active': restaurant.details.organic == 1, 'col col-25 badges': restaurant.details.organic == 0 || 'null'}"><span>organic</span><i ng-if="restaurant.details.organic" class="ion-checkmark-round" style="margin-left:5px;"></i></div>
+  <div ng-class="{'col col-20 badges-active': restaurant.details.local == 1, 'col col-20 badges': restaurant.details.local == 0 || 'null'}"><span>local</span><i ng-if="restaurant.details.local" class="ion-checkmark-round" style="margin-left:5px;"></i></div>
+  <div ng-class="{'col col-25 badges-active': restaurant.details.glutenfree == 1, 'col col-25 badges': restaurant.details.glutenfree == 0 || 'null'}" style="padding-right:10px;"><span>gluten-free</span><i ng-if="restaurant.details.glutenfree" class="ion-checkmark-round" style="margin-left:5px;"></i></div>
+  </div>
+  </div>
+  <div class="item item-icon-left item-text-wrap"><i class="icon ion-ios7-clock-outline"></i><span class="hours">{{restaurant.details.hour1}}</span><span class="hours" ng-if="restaurant.details.hour2"><br></span><span class="hours">{{ restaurant.details.hour2}}</span><span class="hours" ng-if="restaurant.details.hour3"><br></span><span class="hours">{{ restaurant.hour3}}</span><span class="hours" ng-if="restaurant.details.hour4"><br></span><span class="hours">{{ restaurant.details.hour4}}</span>
+  </div>
+</div>
+
+<div class="list card">
+	<a href="#tab/explore/cuisine/{{ cuisine.cuisId }}" class="item item-icon-left" ng-repeat="cuisine in restaurant.cuisines" >
+		<i class="icon ion-fork"></i>{{ cuisine.cuisineName }}
+	</a>
+
+
+  <a ng-if="restaurant.details.website" href="tel:{{ restaurant.details.phone }}" class="item item-icon-left">
+    <i class="icon ion-ios7-telephone"></i>
+    <p>{{ restaurant.details.phone }}</p>
+  </a>
+
+  <a ng-if="restaurant.details.website" href="http://{{ restaurant.details.website }}" class="item item-icon-left">
+    <i class="icon ion-ios7-world-outline"></i>
+    <p>{{ restaurant.details.website }}&nbsp;</p>
+  </a>
+
+  <a ng-if="restaurant.details.menu" href="#restaurants/{{ restaurant.details.menu }}/menu" class="item item-icon-left">
+    <i class="icon ion-clipboard"></i>
+    <p>View menu</p>
+  </a>
+
+  <a ng-if="restaurant.details.book" href="{{ restaurant.details.book }}" class="item item-icon-left">
+    <i class="icon ion-ios7-bookmarks"></i>
+    <p>Book a table</p>
+  </a>
+
+</div>
+
+<div class="list card">
+
+  <p class="item"><strong>Parking: </strong><span ng-if="restaurant.details.garage">garage</span>&nbsp;<span ng-if="restaurant.details.lot">lot</span>&nbsp;<span ng-if="restaurant.details.streetp">street</span>&nbsp;<span ng-if="restaurant.details.valet">valet</span></p>
+  <p class="item"><strong>Reservations: </strong> <span ng-if="restaurant.details.reservations">yes</span><span ng-if="!restaurant.details.reservations">no</span></p>
+  <p class="item"><strong>Take-Out: </strong> <span ng-if="restaurant.details.takeout">yes</span><span ng-if="!restaurant.details.takeout">no</span></p>
+  <p class="item"><strong>Delivery: </strong> <span ng-if="restaurant.details.delivery">yes</span><span ng-if="!restaurant.details.delivery">no</span></p>
+  <p class="item"><strong>Happy Hour: </strong> <span ng-if="restaurant.details.happyhour">yes</span><span ng-if="!restaurant.details.happyhour">no</span></p>
+<p class="item item-text-wrap"><strong>{{ restaurant.details.hintAuthor }} Hint</strong>: {{ restaurant.details.hint }}</p>
+</div><br>
+  </ion-content>
+</ion-view>

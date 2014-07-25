@@ -1,0 +1,15 @@
+<ion-view title="Photos of {{ restaurant.details.name }}">
+  <ion-content class="has-header padding" scroll="false" style="background-color:#222;padding:0px;margin:0px;">
+<ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true">
+  <ion-slide>
+    <div class="slider-img"><img ng-src="http://api.veggiesetgo.com/pics/{{ restaurant.photos[0].url }}" style="width:100%;"></div>
+  </ion-slide>
+  <ion-slide>
+    <div class="slider-img" ><img ng-src="http://api.veggiesetgo.com/pics/{{ restaurant.photos[1].url }}" style="width:100%;"></div>
+  </ion-slide>
+  <ion-slide>
+    <div class="slider-img" ><img ng-src="http://api.veggiesetgo.com/pics/{{ restaurant.photos[2].url }}" style="width:100%;"></div>
+  </ion-slide>
+</ion-slide-box>
+</ion-content>
+</ion-view>
