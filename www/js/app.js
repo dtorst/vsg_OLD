@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngResource', 'starter.controllers', 'starter.services', 'starter.filters'])
+angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controllers', 'starter.services', 'starter.filters'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -33,6 +33,7 @@ angular.module('starter', ['ionic', 'ngResource', 'starter.controllers', 'starte
     $ionicScrollDelegate.scrollTop(true);
   };
 })
+
 
 .run(function($rootScope) {
     $rootScope.geoLocation = {status: "LOCATING"}
@@ -67,6 +68,15 @@ angular.module('starter', ['ionic', 'ngResource', 'starter.controllers', 'starte
       templateUrl: "templates/tabs.html"
     })
 
+.state('tab.test-view', {
+  url: '/test',
+  views: {
+    'tab-testview': {
+      templateUrl: 'templates/test-view.html',
+      controller: 'AppCtrl'
+    }
+  }
+})
     // Explore / Discovery:
 
     .state('tab.explore', {
@@ -200,8 +210,7 @@ angular.module('starter', ['ionic', 'ngResource', 'starter.controllers', 'starte
       url: '/about',
       views: {
         'tab-about': {
-          templateUrl: 'templates/tab-about.html',
-          controller: 'AboutCtrl'
+          templateUrl: 'templates/tab-about.html'
         }
       }
     })

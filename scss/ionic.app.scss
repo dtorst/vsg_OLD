@@ -18,6 +18,23 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 /* Empty. Add your own CSS if you like */
+/*
+.slider-pager {
+position: fixed !important;
+bottom: 120px !important;
+}
+*/
+.slider {
+height:100% !important;
+}
+/*
+.slider-img {
+  padding-top:50px;
+}
+*/
+.slider-img > img {
+  max-height:100%;
+}
 
 .list .item.item-accordion {
   line-height: 38px;

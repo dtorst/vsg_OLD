@@ -2,7 +2,7 @@ angular.module('starter.services', ['ngResource'])
 
 /**
  * A simple example service that returns some data.
- *
+ */
 .factory('Employees', function() {
   // Might use a resource here that returns a JSON array
 
@@ -23,30 +23,7 @@ angular.module('starter.services', ['ngResource'])
       return employees[employeeId];
     }
   }
-}) */
-.factory('DataService', function($q, $timeout) {
-
-    var getContacts = function() {
-
-        var deferred = $q.defer();
-
-        $timeout( function(){
-            deferred.resolve([
-                { name: 'Gordon Freeman' },
-                { name: 'Barney Calhoun' },
-                { name: 'Lamarr the Headcrab' },
-            ]);
-
-        }, 1500);
-
-        return deferred.promise;
-    };
-
-    return {
-        getContacts : getContacts
-    }
 })
-
 
 .factory('Explore', ['$resource',
     function ($resource) {

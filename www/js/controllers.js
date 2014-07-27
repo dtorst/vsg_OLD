@@ -22,11 +22,6 @@ angular.module('starter.controllers', [])
 
 .controller('ExploreCtrl', function($scope, $timeout, $ionicLoading, Explore, myCache, filterFilter) {
 
-$scope.exLink = function (link) {
-  var url = link.href;
-  window.open(encodeURI(url), '_system', 'location=no');
-};
-
   $scope.toggleGroup = function(group) {
     if ($scope.isGroupShown(group)) {
       $scope.shownGroup = null;
@@ -218,8 +213,6 @@ else {
   $scope.restaurant = Explore.get({restaurantId: $stateParams.restaurantId});
 })
 
-.controller('NewCtrl', function($scope) {
-})
 
 .controller('PicsCtrl', function($scope, $stateParams, $ionicSlideBoxDelegate, Explore) {
   $scope.restaurant = Explore.get({restaurantId: $stateParams.restaurantId});
@@ -229,28 +222,38 @@ else {
 
 .controller('MapCtrl', function($rootScope, $scope, Locations, $ionicLoading, $timeout) {
 
-  $scope.hello = function() {
-console.log('hello!');
-  };
     $ionicLoading.show({
       template: 'Loading...',
       animation: 'fade-in',
-      showDelay: 0
+      showDelay: 500
     });
-    $timeout(function () {
-    	$ionicLoading.hide();
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position){
 			$scope.$apply(function(){
 		$scope.restaurants = Locations.query({lat: $rootScope.latitude, lng: $rootScope.longitude});
+    $ionicLoading.hide();
 			});
 		});
 	};
 
-    }, 500);
-
 })
 
-.controller('AboutCtrl', function($scope) {
+.controller('AppCtrl', function($scope, $ionicLoading, DataService) {
+  
+  $ionicLoading.show({
+      content: 'Loading Data',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 500
+  });
+
+    DataService.getContacts().then(
+        function(contacts) {
+            $scope.contacts = contacts;
+            $ionicLoading.hide();
+        }
+    )
+
 });
