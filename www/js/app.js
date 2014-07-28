@@ -34,25 +34,6 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
   };
 })
 
-/*
-.run(function($rootScope) {
-    $rootScope.geoLocation = {status: "LOCATING"}
-    navigator.geolocation.getCurrentPosition(function(location) {
-        //Success callback
-        $rootScope.geoLocation.coords = location.coords;
-        $rootScope.latitude = location.coords.latitude;
-        $rootScope.longitude = location.coords.longitude;
-        $rootScope.geoLocation.status = "AVAILABLE";
-        console.log(angular.toJson($rootScope.geoLocation));
-    }, function(positionError) {
-        //ERROR callback
-        console.log("ERROR : " + angular.toJson(positionError));
-        $rootScope.$apply(function() {
-            $rootScope.geoLocation.status = "UNAVAILABLE";
-        }); 
-    }); 
-})
-*/
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -68,16 +49,7 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
-/*
-.state('tab.test-view', {
-  url: '/test',
-  views: {
-    'tab-testview': {
-      templateUrl: 'templates/test-view.html',
-      controller: 'AppCtrl'
-    }
-  }
-})*/
+
     // Explore / Discovery:
 
     .state('tab.explore', {

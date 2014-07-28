@@ -12,3 +12,5 @@ npm-debug.log
 package.json
 platforms/
 plugins/
+www/tester.html
+www/iphone5.png
