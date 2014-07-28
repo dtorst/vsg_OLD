@@ -32,23 +32,26 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('LoadCtrl', function($scope, $ionicLoading) {
+.controller('LoadCtrl', function($scope, $ionicLoading, $timeout) {
   $scope.totalDisplayed = 10;
+
   $scope.loadMore = function () {
     $ionicLoading.show({
       template: '<i class="icon ion-loading-c"></i>',
       animation: 'fade-in',
       showBackdrop: false,
       maxWidth: 200,
-      showDelay: 1500
+      showDelay: 0
   });
+    $timeout(function() {
       $scope.totalDisplayed += 10; 
           $ionicLoading.hide();
-  	if ($scope.totalDisplayed < $scope.restaurants.length) {
+    if ($scope.totalDisplayed < $scope.restaurants.length) {
       $scope.noMoreEntries = false;
-	} else {
-  		$scope.noMoreEntries = true;
-		} 
+  } else {
+      $scope.noMoreEntries = true;
+    }
+    }, 1000);
 	};
 })
 
