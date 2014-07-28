@@ -1,6 +1,6 @@
 <ion-view title="Nearby">
 <ion-nav-buttons side="right">
-  <button class="button icon ion-pinpoint" ng-click="hello()"></button>
+  <button class="button icon ion-pinpoint" style="border:none;" ng-click="findAgain()"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
           <div class="panel-body">
@@ -8,7 +8,7 @@
                 Displaying listings near your current location.
             </div>
             <div class="alert alert-info" ng-show="geoLocation.status=='LOCATING'">
-                Finding your current location.
+                Finding your current location.&nbsp;<i class="icon ion-loading-c"></i>
             </div>
             <div class="alert alert-danger" ng-show="geoLocation.status=='UNAVAILABLE'">
                 Unable to find your current location. Try again, or search for an address.

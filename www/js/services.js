@@ -24,27 +24,10 @@ angular.module('starter.services', ['ngResource'])
     }
   }
 }) */
-.factory('DataService', function($q, $timeout) {
+.factory('DataService', function($resource) {
 
-    var getContacts = function() {
+var Regions = $resource('http://api.veggiesetgo.com/cuisines');
 
-        var deferred = $q.defer();
-
-        $timeout( function(){
-            deferred.resolve([
-                { name: 'Gordon Freeman' },
-                { name: 'Barney Calhoun' },
-                { name: 'Lamarr the Headcrab' },
-            ]);
-
-        }, 1500);
-
-        return deferred.promise;
-    };
-
-    return {
-        getContacts : getContacts
-    }
 })
 
 
@@ -65,4 +48,8 @@ angular.module('starter.services', ['ngResource'])
 
 .factory('myCache', function ($cacheFactory) {
         return $cacheFactory('myData');
+})
+
+.factory('myCacheA', function ($cacheFactory) {
+        return $cacheFactory('myDataA');
 });

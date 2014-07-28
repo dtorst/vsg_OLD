@@ -20,13 +20,13 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
     }
   });
 })
-/*
-.run(function($cordovaSplashScreen) {
+
+.run(function($cordovaSplashscreen) {
   setTimeout(function() {
-    $cordovaSplashScreen.hide()
+    $cordovaSplashscreen.hide()
   }, 5000)
 })
-*/
+
 
 .run(function($rootScope, $ionicScrollDelegate) {
     $rootScope.scrollTop = function() {
@@ -34,7 +34,7 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
   };
 })
 
-
+/*
 .run(function($rootScope) {
     $rootScope.geoLocation = {status: "LOCATING"}
     navigator.geolocation.getCurrentPosition(function(location) {
@@ -52,6 +52,7 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
         }); 
     }); 
 })
+*/
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -67,7 +68,7 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
       abstract: true,
       templateUrl: "templates/tabs.html"
     })
-
+/*
 .state('tab.test-view', {
   url: '/test',
   views: {
@@ -76,7 +77,7 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
       controller: 'AppCtrl'
     }
   }
-})
+})*/
     // Explore / Discovery:
 
     .state('tab.explore', {

@@ -1,17 +1,49 @@
 angular.module('starter.controllers', [])
 
-.controller('CuisCtrl', function($scope, Cuisines) {
-	$scope.cuisines = Cuisines.query();
+.controller('CuisCtrl', function($scope, $ionicLoading, $resource) {
+  $ionicLoading.show({
+      template: '<i class="icon ion-loading-c"></i>',
+      animation: 'fade-in',
+      showBackdrop: false,
+      maxWidth: 200,
+      showDelay: 0
+  });
+  var Cuisines = $resource('http://api.veggiesetgo.com/cuisines/:cuisineId');
+  $scope.cuisines = Cuisines.query();
+  $scope.cuisines.$promise.then(function (result) {
+    $scope.cuisines = result;
+    $ionicLoading.hide();
+  });
 })
 
-.controller('CuisineDetailCtrl', function($scope, $stateParams, Cuisines) {
-  $scope.restaurants = Cuisines.query({cuisineId: $stateParams.cuisineId});
+.controller('CuisineDetailCtrl', function($scope, $stateParams, $resource, $ionicLoading) {
+    $ionicLoading.show({
+      template: '<i class="icon ion-loading-c"></i>',
+      animation: 'fade-in',
+      showBackdrop: false,
+      maxWidth: 200,
+      showDelay: 0
+  });
+  var Cuisine = $resource('http://api.veggiesetgo.com/cuisines/:cuisineId');
+  $scope.restaurants = Cuisine.query({cuisineId: $stateParams.cuisineId});
+  $scope.restaurants.$promise.then(function (result) {
+    $scope.restaurants = result;
+    $ionicLoading.hide();
+  });
 })
 
-.controller('LoadCtrl', function($scope) {
+.controller('LoadCtrl', function($scope, $ionicLoading) {
   $scope.totalDisplayed = 10;
   $scope.loadMore = function () {
+    $ionicLoading.show({
+      template: '<i class="icon ion-loading-c"></i>',
+      animation: 'fade-in',
+      showBackdrop: false,
+      maxWidth: 200,
+      showDelay: 1500
+  });
       $scope.totalDisplayed += 10; 
+          $ionicLoading.hide();
   	if ($scope.totalDisplayed < $scope.restaurants.length) {
       $scope.noMoreEntries = false;
 	} else {
@@ -70,7 +102,7 @@ if (cache) {
 }
 else {
     $ionicLoading.show({
-      template: 'Loading...',
+      template: '<i class="icon ion-loading-c"></i>',
       animation: 'fade-in',
       showDelay: 0
     });
@@ -209,8 +241,21 @@ else {
 
 })
 
-.controller('DetailCtrl', function($scope, $stateParams, Explore) {
-  $scope.restaurant = Explore.get({restaurantId: $stateParams.restaurantId});
+.controller('DetailCtrl', function($scope, $stateParams, $resource, $ionicLoading) {
+  $ionicLoading.show({
+      content: '<i class="icon ion-loading-c"></i>',
+      animation: 'fade-in',
+      showBackdrop: false,
+      maxWidth: 200,
+      showDelay: 0
+  });
+
+var Restaurant = $resource('http://api.veggiesetgo.com/restaurants/:restaurantId');
+$scope.restaurant = Restaurant.get({restaurantId: $stateParams.restaurantId});
+  $scope.restaurant.$promise.then(function (result) {
+    $scope.restaurant = result;
+    $ionicLoading.hide();
+  });
 })
 
 
@@ -220,40 +265,66 @@ else {
 })
 
 
-.controller('MapCtrl', function($rootScope, $scope, Locations, $ionicLoading, $timeout) {
+.controller('MapCtrl', function($scope, $resource, $cordovaGeolocation, myCacheA, $ionicLoading) {
 
+  $scope.findAgain = function() {
+    $scope.geoLocation = {status: "LOCATING"}
+    $cordovaGeolocation.getCurrentPosition().then(function(position) {
     $ionicLoading.show({
-      template: 'Loading...',
+      template: '<i class="icon ion-loading-c"></i>',
       animation: 'fade-in',
-      showDelay: 500
+      showDelay: 0
     });
 
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position){
-			$scope.$apply(function(){
-		$scope.restaurants = Locations.query({lat: $rootScope.latitude, lng: $rootScope.longitude});
+      // Position here: position.coords.latitude, position.coords.longitude
+      $scope.latitude = position.coords.latitude;
+      $scope.longitude = position.coords.longitude;
+    $scope.geoLocation = {status: "AVAILABLE"};
+      console.log('latitude: ' + position.coords.latitude + ', longitude: ' + position.coords.longitude);
+
+  var Locations = $resource('http://api.veggiesetgo.com/nearby/:lat/:lng');
+  $scope.restaurants = Locations.query({lat: $scope.latitude, lng: $scope.longitude});
+  $scope.restaurants.$promise.then(function (result) {
+    $scope.restaurants = result;
     $ionicLoading.hide();
-			});
-		});
-	};
-
-})
-
-.controller('AppCtrl', function($scope, $ionicLoading, DataService) {
-  
-  $ionicLoading.show({
-      content: 'Loading Data',
-      animation: 'fade-in',
-      showBackdrop: true,
-      maxWidth: 200,
-      showDelay: 500
   });
 
-    DataService.getContacts().then(
-        function(contacts) {
-            $scope.contacts = contacts;
+      myCacheA.put('myDataA', $scope.restaurants); 
+    }, function(err) {
+      // error
+    $scope.geoLocation = {status: "UNAVAILABLE"};
             $ionicLoading.hide();
-        }
-    )
+    });
+  };
 
+var cacheA = myCacheA.get('myDataA');
+if (cacheA) {
+  $scope.restaurants = cacheA;
+}
+else {
+    $scope.geoLocation = {status: "LOCATING"}
+    $cordovaGeolocation.getCurrentPosition().then(function(position) {
+    $ionicLoading.show({
+      template: '<i class="icon ion-loading-c"></i>',
+      animation: 'fade-in',
+      showDelay: 0
+    });
+      // Position here: position.coords.latitude, position.coords.longitude
+      $scope.latitude = position.coords.latitude;
+      $scope.longitude = position.coords.longitude;
+    $scope.geoLocation = {status: "AVAILABLE"};
+      console.log('latitude: ' + position.coords.latitude + ', longitude: ' + position.coords.longitude);
+  var Locations = $resource('http://api.veggiesetgo.com/nearby/:lat/:lng');
+  $scope.restaurants = Locations.query({lat: $scope.latitude, lng: $scope.longitude});
+  $scope.restaurants.$promise.then(function (result) {
+    $scope.restaurants = result;
+    $ionicLoading.hide();
+  });
+      myCacheA.put('myDataA', $scope.restaurants); 
+    }, function(err) {
+      // error
+    $scope.geoLocation = {status: "UNAVAILABLE"};
+            $ionicLoading.hide();
+    });
+}
 });
