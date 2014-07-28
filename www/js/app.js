@@ -119,6 +119,15 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
       }
     })
 
+    .state('tab.explore-restaurant-map', {
+      url: '/explore/restaurant/:restaurantId/map',
+      views: {
+        'tab-explore': {
+          templateUrl: 'templates/e/restaurant-map.html',
+          controller: 'DetailCtrl'
+        }
+      }
+    })
 
 // Nearby / Map
 
@@ -162,6 +171,16 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
       }
     })
 
+    .state('tab.nearby-restaurant-map', {
+      url: '/nearby/restaurant/:restaurantId/map',
+      views: {
+        'tab-nearby': {
+          templateUrl: 'templates/n/restaurant-map.html',
+          controller: 'DetailCtrl'
+        }
+      }
+    })
+
 // Cuisines 
 
     .state('tab.cuisines', {
@@ -200,6 +219,16 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
         'tab-cuisines': {
           templateUrl: 'templates/c/restaurant-pics.html',
           controller: 'PicsCtrl'
+        }
+      }
+    })
+
+    .state('tab.cuisine-restaurant-map', {
+      url: '/cuisine/restaurant/:restaurantId/map',
+      views: {
+        'tab-cuisine': {
+          templateUrl: 'templates/c/restaurant-map.html',
+          controller: 'DetailCtrl'
         }
       }
     })

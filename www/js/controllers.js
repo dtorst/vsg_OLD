@@ -34,7 +34,11 @@ angular.module('starter.controllers', [])
 
 .controller('LoadCtrl', function($scope, $ionicLoading, $timeout) {
   $scope.totalDisplayed = 10;
-
+  $timeout(function() {
+    if ($scope.restaurants.length < 10) {
+      $scope.noMoreEntries = true;
+    };
+  }, 1000);
   $scope.loadMore = function () {
     $ionicLoading.show({
       template: '<i class="icon ion-loading-c"></i>',
@@ -268,7 +272,7 @@ $scope.restaurant = Restaurant.get({restaurantId: $stateParams.restaurantId});
 })
 
 
-.controller('MapCtrl', function($scope, $resource, $cordovaGeolocation, myCacheA, $ionicLoading) {
+.controller('MapCtrl', function($scope, $rootScope, $timeout, $resource, $cordovaGeolocation, myCacheA, $ionicLoading) {
 
   $scope.findAgain = function() {
     $scope.geoLocation = {status: "LOCATING"}
@@ -280,8 +284,8 @@ $scope.restaurant = Restaurant.get({restaurantId: $stateParams.restaurantId});
     });
 
       // Position here: position.coords.latitude, position.coords.longitude
-      $scope.latitude = position.coords.latitude;
-      $scope.longitude = position.coords.longitude;
+      $rootScope.latitude = position.coords.latitude;
+      $rootScope.longitude = position.coords.longitude;
     $scope.geoLocation = {status: "AVAILABLE"};
       console.log('latitude: ' + position.coords.latitude + ', longitude: ' + position.coords.longitude);
 
@@ -313,8 +317,8 @@ else {
       showDelay: 0
     });
       // Position here: position.coords.latitude, position.coords.longitude
-      $scope.latitude = position.coords.latitude;
-      $scope.longitude = position.coords.longitude;
+      $rootScope.latitude = position.coords.latitude;
+      $rootScope.longitude = position.coords.longitude;
     $scope.geoLocation = {status: "AVAILABLE"};
       console.log('latitude: ' + position.coords.latitude + ', longitude: ' + position.coords.longitude);
   var Locations = $resource('http://api.veggiesetgo.com/nearby/:lat/:lng');
@@ -330,4 +334,5 @@ else {
             $ionicLoading.hide();
     });
 }
+
 });

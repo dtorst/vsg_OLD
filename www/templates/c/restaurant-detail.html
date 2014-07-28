@@ -17,7 +17,7 @@
 </div><!--/item -->
 
   <div class="item" style="padding:0;margin:0;">
-<a href="comgooglemaps://?center={{restaurant.details.lat}},{{restaurant.details.lng}}&zoom=14"><img class="map-main" src="http://maps.googleapis.com/maps/api/staticmap?center={{ restaurant.details.street1 }},{{ restaurant.details.city }}{{ restaurant.details.state }}&zoom=15&size=318x100&maptype=roadmap&markers=color:green%7Clabel:%7C{{ restaurant.details.street1 }},{{ restaurant.details.city }}{{ restaurant.details.state }}&sensor=false" \></a>
+<a href="#tab/cuisine/restaurant/{{ restaurant.details.id}}/map"><img class="map-main" src="http://maps.googleapis.com/maps/api/staticmap?center={{ restaurant.details.street1 }},{{ restaurant.details.city }}{{ restaurant.details.state }}&zoom=15&size=318x100&maptype=roadmap&markers=color:green%7Clabel:%7C{{ restaurant.details.street1 }},{{ restaurant.details.city }}{{ restaurant.details.state }}&sensor=true" \></a>
   </div>
   <div class="item" style="padding:0;margin:0;"> <div class="row">
   <div ng-class="{'col col-20 badges-active': restaurant.details.vegan == 1, 'col col-20 badges': restaurant.details.vegan == 0}"><span>vegan</span><i ng-if="restaurant.details.vegan" class="ion-checkmark-round" style="margin-left:5px;"></i></div>

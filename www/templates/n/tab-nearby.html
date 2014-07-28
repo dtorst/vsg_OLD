@@ -2,7 +2,7 @@
 <ion-nav-buttons side="right">
   <button class="button icon ion-pinpoint" style="border:none;" ng-click="findAgain()"></button>
   </ion-nav-buttons>
-  <ion-content class="has-header">
+  <ion-content class="has-header" delegate-handle="myScroll">
           <div class="panel-body">
             <div class="alert alert-success" ng-show="geoLocation.status=='AVAILABLE'">
                 Displaying listings near your current location.
