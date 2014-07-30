@@ -249,6 +249,12 @@ else {
 })
 
 .controller('DetailCtrl', function($scope, $stateParams, $resource, $ionicLoading) {
+
+$scope.openMaps = function(lat, lng) {
+  console.log("http://www.google.com/maps/@" + lat + "," + lng + ",14z", "_blank");
+  window.open( "http://www.google.com/maps/@" + lat + "," + lng + ",14z", "_blank" );
+};
+
   $ionicLoading.show({
       content: '<i class="icon ion-loading-c"></i>',
       animation: 'fade-in',

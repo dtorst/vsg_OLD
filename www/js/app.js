@@ -198,7 +198,7 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
     .state('tab.cuisine-restaurant-map', {
       url: '/cuisine/restaurant/:restaurantId/map',
       views: {
-        'tab-cuisine': {
+        'tab-cuisines': {
           templateUrl: 'templates/c/restaurant-map.html',
           controller: 'DetailCtrl'
         }

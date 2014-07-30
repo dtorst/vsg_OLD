@@ -5,10 +5,8 @@
 $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #4a87ee !default;
-// $positive:						  #dff0d8 !default;
 $calm:                            #43cee6 !default;
-$balanced: 						  #759b88 !default;
-// $balanced:                        #66cc33 !default;
+$balanced:                        #66cc33 !default;
 $energized:                       #f0b840 !default;
 $assertive:                       #ef4e3a !default;
 $royal:                           #8a6de9 !default;
@@ -662,6 +660,7 @@ $z-index-bar:                     10 !default;
 $z-index-bar-title:               0 !default;
 $z-index-bar-button:              1 !default;
 $z-index-item:                    2 !default;
+$z-index-item-reorder:            3 !default;
 $z-index-item-checkbox:           3 !default;
 $z-index-item-drag:               0 !default;
 $z-index-item-edit:               0 !default;
@@ -671,11 +670,13 @@ $z-index-item-reordering:         9 !default;
 $z-index-item-toggle:             3 !default;
 $z-index-loading:                 13 !default;
 $z-index-menu:                    0 !default;
+$z-index-menu-bar-header:         11 !default;
+$z-index-menu-scroll-content:     10 !default;
 $z-index-modal:                   10 !default;
 $z-index-pane:                    1 !default;
 $z-index-popup:                   12 !default;
 $z-index-scroll-bar:              9999 !default;
-$z-index-scroll-content-false:    10 !default;
+$z-index-scroll-content-false:    11 !default;
 $z-index-slider-pager:            1 !default;
 $z-index-tabs:                    5 !default;
 $z-index-view:                    1 !default;
@@ -684,4 +685,4 @@ $z-index-view:                    1 !default;
 // Platform
 // -------------------------------
 
-$ios7-statusbar-height:           20px !default;
+$ios-statusbar-height:           20px !default;
