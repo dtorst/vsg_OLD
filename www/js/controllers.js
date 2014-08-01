@@ -253,7 +253,7 @@ else {
 
 $scope.openMaps = function(lat, lng) {
   console.log("http://www.google.com/maps/@" + lat + "," + lng + ",14z", "_blank");
-  window.open( "comgooglemaps://?center=" + lat + "," + lng + "&zoom=12", "_system" );
+  window.open( "comgooglemaps://?q=" + lat + "," + lng + "&zoom=12", "_system" );
 };
 
   $ionicLoading.show({
