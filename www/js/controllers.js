@@ -59,7 +59,7 @@ angular.module('starter.controllers', [])
 	};
 })
 
-.controller('ExploreCtrl', function($scope, $timeout, $ionicLoading, Explore, myCache, filterFilter) {
+.controller('ExploreCtrl', function($scope, $timeout, $resource, $ionicLoading, myCache, filterFilter) {
 
   $scope.toggleGroup = function(group) {
     if ($scope.isGroupShown(group)) {
@@ -114,10 +114,11 @@ else {
       showDelay: 0
     });
     $timeout(function () {
-    	$ionicLoading.hide();
-        $scope.restaurants = Explore.query();
+    	$ionicLoading.hide(); 
+  var Locations = $resource('http://api.veggiesetgo.com/nearby/:lat/:lng');
+  $scope.restaurants = Locations.query({lat: $scope.latitude, lng: $scope.longitude});
     }, 500);
-	myCache.put('myData', Explore.query());	
+	myCache.put('myData', $scope.restaurants);	
 }
 
     // Watch the restaurants that are selected
