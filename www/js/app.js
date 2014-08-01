@@ -24,7 +24,7 @@ angular.module('starter', ['ngCordova', 'ionic', 'ngResource', 'starter.controll
 .run(function($cordovaSplashscreen) {
   setTimeout(function() {
     $cordovaSplashscreen.hide()
-  }, 5000)
+  }, 2000)
 })
 
 
