@@ -8,7 +8,7 @@ angular.module('starter.controllers', [])
       maxWidth: 200,
       showDelay: 0
   });
-  var Cuisines = $resource('http://api.veggiesetgo.com/cuisines/:cuisineId');
+  var Cuisines = $resource('http://api.veggiesetgo.com/cuisines');
   $scope.cuisines = Cuisines.query();
   $scope.cuisines.$promise.then(function (result) {
     $scope.cuisines = result;
@@ -24,8 +24,8 @@ angular.module('starter.controllers', [])
       maxWidth: 200,
       showDelay: 0
   });
-  var Cuisine = $resource('http://api.veggiesetgo.com/cuisines/:cuisineId');
-  $scope.restaurants = Cuisine.query({cuisineId: $stateParams.cuisineId});
+  var Cuisine = $resource('http://api.veggiesetgo.com/cuisines/:cuisineId/:lat/:lng');
+  $scope.restaurants = Cuisine.query({cuisineId: $stateParams.cuisineId, lat: $scope.latitude, lng: $scope.longitude});
   $scope.restaurants.$promise.then(function (result) {
     $scope.restaurants = result;
     $ionicLoading.hide();
