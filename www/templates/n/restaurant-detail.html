@@ -60,7 +60,7 @@
 
 <div class="list card">
 
-  <p class="item"><strong>Parking: </strong><span ng-if="restaurant.details.garage">Garage</span>&nbsp;<span ng-if="restaurant.details.lot">Lot</span>&nbsp;<span ng-if="restaurant.details.streetp">Street</span>&nbsp;<span ng-if="restaurant.details.valet">Valet</span></p>
+  <p class="item"><strong>Parking: </strong><span ng-repeat="park in restaurant.parking">{{park.type}}{{$last ? '' : ', '}}</span></p>
   <p class="item"><strong>Reservations: </strong> <span ng-if="restaurant.details.reservations">Yes</span><span ng-if="!restaurant.details.reservations">No</span></p>
   <p class="item"><strong>Take-Out: </strong> <span ng-if="restaurant.details.takeout">Yes</span><span ng-if="!restaurant.details.takeout">No</span></p>
   <p class="item"><strong>Delivery: </strong> <span ng-if="restaurant.details.delivery">Yes</span><span ng-if="!restaurant.details.delivery">No</span></p>
