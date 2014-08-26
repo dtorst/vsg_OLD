@@ -100,6 +100,7 @@ $scope.useLocal = {};
 $scope.useGlutenFree = {};
 $scope.useOrganic = {};
 $scope.useVegan = {};
+$scope.useHappyHour = {};
 
     $scope.group = {}; 
   
@@ -115,7 +116,7 @@ else {
     });
     $timeout(function () {
     	$ionicLoading.hide(); 
-  var Locations = $resource('http://api.veggiesetgo.com/nearby/:lat/:lng');
+  var Locations = $resource('http://api.veggiesetgo.com/search/:lat/:lng');
   $scope.restaurants = Locations.query({lat: $scope.latitude, lng: $scope.longitude});
     }, 500);
 	myCache.put('myData', $scope.restaurants);	
@@ -130,7 +131,8 @@ else {
             useLocal: $scope.useLocal,
             useGlutenFree: $scope.useGlutenFree,
             useOrganic: $scope.useOrganic,
-            useVegan: $scope.useVegan
+            useVegan: $scope.useVegan,
+            useHappyHour: $scope.useHappyHour
         }
     }, function (value) {
         var selected;
@@ -225,11 +227,30 @@ else {
         if (!selected) {
             filterAfterVegan = filterAfterOrganic;
         }
+
+        var filterAfterHappyHour = [];
+        selected = false;
+        for (var j in filterAfterVegan) {
+          var p = filterAfterOrganic[j];
+          for (var i in $scope.useHappyHour) {
+            if ($scope.useHappyHour[i]) {
+              selected = true;
+              if (i === p.vegan) {
+                filterAfterHappyHour.push(p);
+                break;
+              }
+            }
+          }
+        }
+        if (!selected) {
+          filterAfterHappyHour = filterAfterVegan;
+        }
+        
 //        $scope.priceGroup = uniqueItems($scope.restaurants, 'price');
         var filterAfterPrice = [];        
         selected = false;
-        for (var j in filterAfterVegan) {
-            var p = filterAfterVegan[j];
+        for (var j in filterAfterHappyHour) {
+            var p = filterAfterHappyHour[j];
             for (var i in $scope.usePrice) {
                 if ($scope.usePrice[i]) {
                     selected = true;
@@ -241,7 +262,7 @@ else {
             }       
         }
         if (!selected) {
-            filterAfterPrice = filterAfterVegan;
+            filterAfterPrice = filterAfterHappyHour;
         }
       
           $scope.filteredRestaurants = filterAfterPrice;
