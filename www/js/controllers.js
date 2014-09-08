@@ -231,11 +231,11 @@ else {
         var filterAfterHappyHour = [];
         selected = false;
         for (var j in filterAfterVegan) {
-          var p = filterAfterOrganic[j];
+          var p = filterAfterVegan[j];
           for (var i in $scope.useHappyHour) {
             if ($scope.useHappyHour[i]) {
               selected = true;
-              if (i === p.vegan) {
+              if (i === p.happyhour) {
                 filterAfterHappyHour.push(p);
                 break;
               }

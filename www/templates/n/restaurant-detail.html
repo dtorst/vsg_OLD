@@ -15,12 +15,12 @@
   <h2>{{ restaurant.details.name }}&nbsp;<span style="font-weight:normal;font-size:0.9em;color:#5a5a5a;">({{ restaurant.details.price }})</span></h2>
 </div>
 <div class="row"> <!-- address -->
-<p style="font-weight:normal;font-size:0.8em;margin-left:-5px;">{{ restaurant.details.street1 }} {{ restaurant.details.city }}, {{ restaurant.details.state }} {{ restaurant.details.zip }}</p>
+<p style="font-weight:normal;font-size:0.8em;margin-left:-5px;">{{ restaurant.details.street1 }} {{ restaurant.details.street2 }} {{ restaurant.details.city }}, {{ restaurant.details.state }} {{ restaurant.details.zip }}</p>
 </div>
 </div><!--/item -->
 
   <div class="item" style="padding:0;margin:0;">
-<a href="#tab/nearby/restaurant/{{ restaurant.details.id}}/map"><img class="map-main" src="http://maps.googleapis.com/maps/api/staticmap?center={{ restaurant.details.street1 }},{{ restaurant.details.city }}{{ restaurant.details.state }}&zoom=15&size=318x100&maptype=roadmap&markers=color:green%7Clabel:%7C{{ restaurant.details.street1 }},{{ restaurant.details.city }}{{ restaurant.details.state }}&sensor=true" \></a>
+<a href="#tab/nearby/restaurant/{{ restaurant.details.id}}/map"><img class="map-main" src="http://maps.googleapis.com/maps/api/staticmap?center={{ restaurant.details.street1 }},{{ restaurant.details.city }},{{ restaurant.details.state }}&zoom=15&size=318x100&maptype=roadmap&markers=color:green%7Clabel:%7C{{ restaurant.details.street1 }},{{ restaurant.details.city }},{{ restaurant.details.state }}&sensor=true" \></a>
   </div>
   <div class="item" style="padding:0;margin:0;"> <div class="row">
   <div ng-class="{'col col-20 badges-active': restaurant.details.vegan == 1, 'col col-20 badges': restaurant.details.vegan == null}"><span>vegan</span><i ng-if="restaurant.details.vegan" class="ion-checkmark-round" style="margin-left:5px;"></i></div>

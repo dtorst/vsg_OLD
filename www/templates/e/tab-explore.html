@@ -1,16 +1,20 @@
 <ion-view title="Discover">
 
   <ion-content>
-    <label class="item-divider item-input">
-    <i class="icon ion-search placeholder-icon"></i>
-    <input type="text" placeholder="Search by name, city, or keywords" data-ng-model="query">
-  </label>
+
+  <div class="item item-input-inset" style="background-color:#eee;">
+    <label class="item-input-wrapper" style="background-color:#fff;color:#000;">
+        <i class="icon ion-search placeholder-icon" style="color:#000;"></i>
+      <input type="text" placeholder="Search by name, city, or keywords" data-ng-model="query">
+    </label>
+  </div>
+
 
       <ion-list>
       <div>
       <ion-item class="item item-divider"
           ng-click="toggleGroup1(group)"
-          ng-class="{active: isGroup1Shown(group)}">
+          ng-class="{active: isGroup1Shown(group)}" style="background-color:#eee;">
       <i class="icon" ng-class="isGroup1Shown(group) ? 'ion-minus' : 'ion-plus'"></i>&nbsp;
       Vegetarian Rating</ion-item>
 <li class="item item-checkbox item-accordion" ng-show="isGroup1Shown(group)"><label class="checkbox checkbox-balanced"><input type="checkbox" ng-model="useRating[1]"></label>1 artichoke</li>
@@ -24,7 +28,7 @@
 <div>
       <ion-item class="item item-divider"
           ng-click="toggleGroup(group)"
-          ng-class="{active: isGroupShown(group)}">
+          ng-class="{active: isGroupShown(group)}" style="background-color:#eee;">
           <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>&nbsp;
           Price</ion-item>
 
@@ -37,7 +41,7 @@
       <div>
       <ion-item class="item item-divider"
           ng-click="toggleGroup2(group)"
-          ng-class="{active: isGroup2Shown(group)}">
+          ng-class="{active: isGroup2Shown(group)}" style="background-color:#eee;">
       <i class="icon" ng-class="isGroup2Shown(group) ? 'ion-minus' : 'ion-plus'"></i>&nbsp;
       Options</ion-item>
 <li class="item item-checkbox item-accordion" ng-show="isGroup2Shown(group)"><label class="checkbox checkbox-balanced"><input type="checkbox" ng-model="useLocal[1]"></label>Local</li>
