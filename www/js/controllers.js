@@ -59,6 +59,34 @@ angular.module('starter.controllers', [])
 	};
 })
 
+.controller('LoadExploreCtrl', function($scope, $ionicLoading, $timeout) {
+  $scope.totalDisplayed = 10;
+/*  $timeout(function() {
+    if ($scope.restaurants.length < 10) {
+      $scope.noMoreEntries = true;
+    };
+  }, 1000);
+*/
+  $scope.loadMore = function () {
+    $ionicLoading.show({
+      template: '<i class="icon ion-loading-c"></i>',
+      animation: 'fade-in',
+      showBackdrop: false,
+      maxWidth: 200,
+      showDelay: 0
+  });
+    $timeout(function() {
+      $scope.totalDisplayed += 10; 
+          $ionicLoading.hide();
+    if ($scope.totalDisplayed < $scope.filteredRestaurants.length) {
+      $scope.noMoreEntries = false;
+  } else {
+      $scope.noMoreEntries = true;
+    }
+    }, 1000);
+  };
+})
+
 .controller('ExploreCtrl', function($scope, $timeout, $resource, $ionicLoading, myCache, filterFilter) {
 
   $scope.toggleGroup = function(group) {
@@ -301,6 +329,34 @@ $scope.restaurant = Restaurant.get({restaurantId: $stateParams.restaurantId});
 
 
 .controller('MapCtrl', function($scope, $rootScope, $timeout, $resource, $cordovaGeolocation, myCacheA, $ionicLoading) {
+
+$scope.codeAddress = function() {
+  var geocoder = new google.maps.Geocoder();
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    $ionicLoading.show({
+      template: '<i class="icon ion-loading-c"></i>',
+      animation: 'fade-in',
+      showDelay: 0
+    });
+
+    if (status == google.maps.GeocoderStatus.OK) {
+      $scope.newLatitude = results[0].geometry.location.k;
+      $scope.newLongitude = results[0].geometry.location.B;
+    var Locations = $resource('http://api.veggiesetgo.com/nearby/:lat/:lng');
+  $scope.restaurants = Locations.query({lat: $scope.newLatitude, lng: $scope.newLongitude});
+  $scope.restaurants.$promise.then(function (result) {
+    $scope.restaurants = result;
+    $ionicLoading.hide();
+  });
+
+      myCacheA.put('myDataA', $scope.restaurants);
+      console.log('latitude: ' + results[0].geometry.location.B + ', longitude: ' + results[0].geometry.location.k);
+    } else {
+      console.log('nope.');
+    }
+  });
+}
 
   $scope.findAgain = function() {
     $scope.geoLocation = {status: "LOCATING"}
