@@ -130,7 +130,7 @@ a {
   margin-top: 0;
   color: inherit; }
 
-.alert .alert-link {
+.alert .slink {
   font-weight: bold; }
 
 .alert > p, .alert > ul {
@@ -151,7 +151,19 @@ a {
 .alert-success {
   color: #3c763d;
   background-color: #dff0d8;
-  border-color: #d6e9c6; }
+  border-color: #d6e9c6;
+  -webkit-animation-name: slideOut;
+  -webkit-animation-iteration-count: once;
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  animation-name: slideOut;
+  animation-iteration-count: once;
+  animation-timing-function: ease-in;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards; }
 
 .alert-success hr {
   border-top-color: #c9e2b3; }
@@ -191,6 +203,20 @@ a {
 
 .alert-danger .alert-link {
   color: #843534; }
+
+@keyframes slideOut {
+  0% {
+    margin-top: 0; }
+
+  100% {
+    margin-top: -50px; } }
+
+@-webkit-keyframes slideOut {
+  0% {
+    margin-top: 0; }
+
+  100% {
+    margin-top: -50px; } }
 
 /*!
   Ionicons, v1.5.2
